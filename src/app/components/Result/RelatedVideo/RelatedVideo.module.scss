@@ -1,0 +1,48 @@
+@use "../../../styles/breakpoints" as *;
+@use "../../../styles/lineClamps" as *;
+
+.related {
+  margin-top: 40px;
+  .relatedTitle {
+    font-size: 16px;
+    font-weight: 500;
+    @include md {
+      font-size: 18px;
+    }
+  }
+
+  .relatedHr {
+    border: 1px solid rgb(220 223 228);
+    margin-bottom: 22.5px;
+  }
+
+  .relatedGrid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+
+    @include md {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include lg {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .relatedLink {
+      @extend .truncate-2;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 300;
+      transition: all 0.15s ease-in-out;
+      &:last-child {
+        padding-top: 5px;
+      }
+      &:last-child:hover {
+        color: crimson;
+      }
+    }
+  }
+}

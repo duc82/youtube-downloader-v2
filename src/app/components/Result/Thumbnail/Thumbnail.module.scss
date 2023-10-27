@@ -1,0 +1,19 @@
+@use "../../../styles/breakpoints" as *;
+
+.thumbnail {
+  flex: none;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0;
+  position: relative;
+
+  @include md {
+    flex: 1 1 45%;
+    padding-right: 16px;
+  }
+
+  .thumbnailTitle {
+    font-weight: 700;
+    padding: 10px 0;
+  }
+}

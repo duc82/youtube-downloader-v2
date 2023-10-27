@@ -1,0 +1,50 @@
+@use "../../styles/breakpoints" as *;
+
+.control {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 700px;
+  margin-bottom: 60px;
+
+  .controlTitle {
+    font-size: 28px;
+    margin-bottom: 40px;
+
+    @include md {
+      font-size: 30px;
+    }
+  }
+
+  .controlForm {
+    display: flex;
+    align-items: center;
+
+    .controlInput {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      padding: 14px;
+      width: 100%;
+      outline: none;
+      border: none;
+      transition: all 0.3s ease-in-out;
+      font-size: 16px;
+    }
+
+    .controlButton {
+      background-color: green;
+      padding: 14px 32px;
+      color: white;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s ease-in-out;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .controlButton:hover {
+      background-color: darkgreen;
+    }
+  }
+}
