@@ -4,31 +4,28 @@ import styles from "./Control.module.scss";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import useVideoUrlStore from "@/app/store/videoUrlStore";
+import { validateVideoUrl } from "@/app/actions/video";
+import { useFormState } from "react-dom";
 
 const Control = () => {
   const [url, setUrl] = useState("");
-  const route = useRouter();
+  const router = useRouter();
   const { videoUrl } = useVideoUrlStore();
 
-  const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const res = await fetch(`/api/videoInfo/validate?url=${url}`);
-      const data = await res.json();
-      if (!res.ok) {
-        toast.error(data.message);
-        return;
-      }
-      route.push(`/youtube/${data.id}`);
-    } catch (error) {
-      const err = error as Error;
-      toast.error(err.message);
-    }
-  };
+  const [state, formAction] = useFormState(validateVideoUrl, {
+    error: "",
+    id: "",
+  });
 
   useEffect(() => {
     setUrl(videoUrl);
   }, [videoUrl]);
+
+  useEffect(() => {
+    if (state.id) {
+      router.push(`/youtube/${state.id}`);
+    }
+  }, [state, router]);
 
   return (
     <div className={styles.control}>
@@ -36,7 +33,7 @@ const Control = () => {
       <h1 className={styles.controlTitle}>
         Download Video and Audio from Youtube
       </h1>
-      <form onSubmit={handleSubmitForm} className={styles.controlForm}>
+      <form action={formAction} className={styles.controlForm}>
         <input
           placeholder="Paste link here..."
           name="url"

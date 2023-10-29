@@ -2,8 +2,8 @@ import styles from "./page.module.scss";
 import Thumbnail from "@/app/components/Result/Thumbnail/Thumbnail";
 import { VideoFormat } from "@/app/type";
 import Data from "@/app/components/Result/Data/Data";
-import { redirect } from "next/navigation";
 import RelatedVideo from "@/app/components/Result/RelatedVideo/RelatedVideo";
+import { getVideoById } from "@/app/actions/video";
 
 interface YoutubeProps {
   params: {
@@ -12,27 +12,22 @@ interface YoutubeProps {
 }
 
 const Youtube = async ({ params }: YoutubeProps) => {
-  const res = await fetch(`${process.env.URL}/api/videoInfo/${params.id}`);
-  const data = await res.json();
+  const info = await getVideoById(params.id);
 
-  if (!res.ok) {
-    redirect("/");
-  }
-
-  const videoFormats = data.formats.filter(
+  const videoFormats = info.formats.filter(
     (format: VideoFormat) =>
       format.mimeType?.includes("video/mp4") &&
       format.audioBitrate === null &&
       !format.hasAudio
   );
-  const audioFormat = data.formats.find(
+  const audioFormat = info.formats.find(
     (format: VideoFormat) =>
       format.mimeType?.includes("audio") &&
       !format.hasVideo &&
       format.audioBitrate === 128
   );
-  const related_videos = data.related_videos;
-  const videoDetails = data.videoDetails;
+  const related_videos = info.related_videos;
+  const videoDetails = info.videoDetails;
 
   const thumbnailUrl =
     videoDetails?.thumbnails[videoDetails.thumbnails.length - 1].url;

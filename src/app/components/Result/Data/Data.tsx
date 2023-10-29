@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Data.module.scss";
 import { VideoCameraIcon, MusicalNoteIcon } from "@heroicons/react/20/solid";
 import { Tab, VideoInfo } from "@/app/type";

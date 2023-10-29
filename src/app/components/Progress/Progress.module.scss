@@ -1,0 +1,47 @@
+@use "../../styles/colors" as *;
+
+$heightProgress: 30px;
+
+.progress {
+  height: $heightProgress;
+  background: $light;
+  position: relative;
+  border-radius: 4px;
+
+  .progressBar {
+    height: inherit;
+    border-radius: inherit;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    &.progressBarStriped {
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: $heightProgress $heightProgress;
+    }
+    &.progressBarAnimated {
+      animation: striped 1s linear infinite;
+    }
+  }
+}
+
+@keyframes striped {
+  0% {
+    background-position: $heightProgress 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}

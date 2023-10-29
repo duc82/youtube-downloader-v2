@@ -121,7 +121,7 @@ interface MoreVideoDetail
 
 export interface VideoFormat {
   itag: number;
-  video_url: string;
+  url: string;
   mimeType?: string;
   bitrate?: number;
   audioBitrate?: number;
@@ -217,9 +217,15 @@ export interface RelatedVideo {
 
 export interface VideoInfo {
   videoFormats: VideoFormat[];
-  audioFormat: VideoFormat | null;
+  audioFormat?: VideoFormat;
   related_videos: RelatedVideo[];
   videoDetails: MoreVideoDetail | null;
 }
 
 export type Tab = "Video" | "Audio";
+
+export interface Download {
+  type: "mp3" | "mp4";
+  url?: string;
+  itag?: number;
+}
