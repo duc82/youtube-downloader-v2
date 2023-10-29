@@ -1,5 +1,6 @@
 import ffmpeg from "fluent-ffmpeg";
 import internal from "stream";
+import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 
 const downloadMp3 = (
   videoSource: string | internal.Readable,
@@ -7,7 +8,7 @@ const downloadMp3 = (
 ) => {
   return new Promise((resolve: (value: string) => void, reject) => {
     ffmpeg({ source: videoSource })
-      .setFfmpegPath(`${process.cwd()}/node_modules/ffmpeg-static/ffmpeg.exe`)
+      .setFfmpegPath(ffmpegPath.path)
       .toFormat("mp3")
       .save(`./public/${filename}`)
       .on("end", function () {
@@ -25,7 +26,7 @@ const downloadMp4 = (
 ) => {
   return new Promise((resolve: (value: string) => void, reject) => {
     ffmpeg()
-      .setFfmpegPath(`${process.cwd()}/node_modules/ffmpeg-static/ffmpeg.exe`)
+      .setFfmpegPath(ffmpegPath.path)
       .addInput(videoSource)
       .addInput(`./public/audio.mp3`)
       .videoCodec("copy")
