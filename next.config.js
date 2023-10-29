@@ -7,8 +7,6 @@ const nextConfig = {
       })
     );
 
-    config.experimental.webpackBuildWorker = true;
-
     return config;
   },
   experimental: {
