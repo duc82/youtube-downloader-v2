@@ -1,3 +1,5 @@
+const ffmpegPath = require("ffmpeg-static");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -8,6 +10,9 @@ const nextConfig = {
     );
 
     return config;
+  },
+  env: {
+    FFMPEG_PATH: ffmpegPath,
   },
   experimental: {
     webpackBuildWorker: true,

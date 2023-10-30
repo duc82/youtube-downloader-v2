@@ -30,10 +30,12 @@ export async function GET(req: NextRequest) {
     });
 
     const stream = ytdl.downloadFromInfo(info, { format });
-
     await downloadMp3(stream, filename);
 
-    return NextResponse.json({ downloadLink: `/${filename}` }, { status: 200 });
+    return NextResponse.json(
+      { downloadLink: `/tmp/${filename}` },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(error, {
       status: 500,
