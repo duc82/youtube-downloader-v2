@@ -1,5 +1,5 @@
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
-console.log(ffmpegPath);
+const ffmpegPath = require("ffmpeg-static")
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
